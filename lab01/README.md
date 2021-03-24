@@ -16,8 +16,12 @@ A primeira parcela a ser paga do financiamento é sempre igual a S. A partir da�
 Parcelamês = Parcelamês-1 * (1 + J / 100)
 
 Exercício Parte 1 - Escrevendo um Programa
+
 Exercício Parte 2 - Escrevendo um Módulo
+
 Exercício Parte 3 - Mantendo o Estado
+
 Exercício Parte 4 - Minimizando os Parâmetros
+
 Exercício Parte 5 - Múltiplos Empréstimos
 
