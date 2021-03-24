@@ -25,4 +25,4 @@ Exercício Parte 4 - Minimizando os Parâmetros
 
 Exercício Parte 5 - Múltiplos Empréstimos
 
-Arquivo do [Lab](MC322/lab01/notebook/emprestimo01-ra234471.ipynb)
+Arquivo do [Lab](/notebook/emprestimo01-ra234471.ipynb)
