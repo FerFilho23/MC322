@@ -1,6 +1,6 @@
 # Lab 02
 
-## # Laboratório em Estruturas de Programação Java
+## Laboratório em Estruturas de Programação Java
 
 ## Desafio 1 - Empréstimo
 
