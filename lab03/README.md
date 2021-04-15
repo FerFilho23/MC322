@@ -42,4 +42,5 @@ Você deve decidir quais os atributos definirá.
 * `apresenta` - retorna uma String com a lombriga no aquário no estado atual (a primeira vez     que o método é chamado, apresenta o estado inicial da lombriga - sem animação);
 * `passo` - executa um único passo da animação.
 
-
+[JAVA PROJECT](https://github.com/FerFilho23/MC322/tree/main/lab03/src/mc322/lab03)
+[NOTEBOOK](https://github.com/FerFilho23/MC322/blob/main/lab03/notebook/lab-lombriga-ra234471.ipynb)
