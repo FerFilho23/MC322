@@ -1,0 +1,45 @@
+# Lab 03
+
+## Lombriga no Aquário
+
+Escreva uma classe em Java em que cada objeto representa uma lombriga em um aquário.
+
+## Tarefa
+
+Escreva uma classe denominada `AquarioLombriga` em que cada objeto representa uma lombriga dentro de um aquário (ambos estarão juntos em um único objeto).
+
+## Métodos
+
+* `construtor` - no construtor é informado como parâmetro: o tamanho do aquário, o tamanho da lombriga e a posição da lombriga no aquário;
+* `crescer` - a lombriga cresce uma unidade dentro do aquário somente se houver espaço para ela crescer na direção oposta à cabeça -- a lombriga só cresce se houver espaço no aquário na direção do crescimento, caso contrário, ela não crescerá, mesmo que o método seja chamado;
+* `mover` - a lombriga se move uma unidade na direção para a qual está virada à cabeça; se ela estiver no limite do aquário (para o lado que ela está virada a cabeça) e for chamado este método ela vira de lado em vez de andar;
+* `virar` - a lombriga vira de lado;
+* `apresenta` - retorna uma String contendo a apresentação da lombriga no aquário no estado atual, conforme foi descrito anteriormente.
+
+## Animando a Lombriga no Aquário
+
+Escreva uma classe em Java que representa uma sequência de ações para animar uma lombriga em um aquário. A sequência de ações é representada pela string:
+
+~~~
+AALLPP$$$$$$$$$$
+~~~
+
+* `AA` - é um número (sempre ocupando dois caracteres) representando o tamanho do aquário; por exemplo, `08` representa um aquário de tamanho 8;
+* `LL` - é um número (sempre ocupando dois caracteres) representando o tamanho da lombriga; por exemplo, `04` representa uma lombriga de tamanho 4;
+* `PP` - é um número (sempre ocupando dois caracteres) representando a posição inicial da lombriga no aquário -- a lombriga começa sempre virada para a direita, portanto trata-se da posição da ponta da cauda; por exemplo, `03` representa uma lombriga na posição 3.
+
+## Tarefa
+
+Escreva uma classe denominada `Animacao` em que cada objeto representa uma animação de uma lombriga em um aquário.
+
+## Atributos
+
+Você deve decidir quais os atributos definirá.
+
+## Métodos
+
+* `construtor` - no construtor é informado como parâmetro: a string de animação, conforme a descrição anterior;
+* `apresenta` - retorna uma String com a lombriga no aquário no estado atual (a primeira vez     que o método é chamado, apresenta o estado inicial da lombriga - sem animação);
+* `passo` - executa um único passo da animação.
+
+
