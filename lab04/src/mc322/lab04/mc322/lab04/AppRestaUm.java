@@ -20,6 +20,6 @@ public class AppRestaUm
 
     public static void main(String[] args) 
     {
-        AppRestaUm.executaJogo("./src/db/teste03.csv");
+        AppRestaUm.executaJogo("../lab04/db/teste01.csv");  //Directory path to tests in DB
     }
 }
