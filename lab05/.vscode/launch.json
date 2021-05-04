@@ -5,16 +5,10 @@
             "name": "Launch AppDama",
             "request": "launch",
             "mainClass": "mc322.lab05b.AppDama",
-            "projectName": "lab05_5b19e687",
-            "args": ["data/tabuleiro.csv"]
-        },
-        {
-            "type": "java",
-            "name": "Launch teste",
-            "request": "launch",
-            "mainClass": "mc322.lab05a.teste",
-            "projectName": "lab05_5b19e687",
-            "args":["data/tabuleiro.csv"]
+            "projectName": "lab05_35556a87",
+            "args": [
+                "data/tabuleiro.csv"
+            ]
         }
     ] 
 }
