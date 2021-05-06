@@ -1,5 +1,8 @@
-package mc322.lab05b;
-import java.io.*;
+package mc322.lab05a;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Tabuleiro {
     private int jogadaInvalida = 0;

@@ -1,9 +1,6 @@
-package mc322.lab05b;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+package mc322.lab05a;
+
+import java.io.*;
 
 public class CSVHandling {
 	private String dataSource;

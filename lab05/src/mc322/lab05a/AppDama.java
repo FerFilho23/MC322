@@ -1,4 +1,5 @@
-package mc322.lab05b;
+package mc322.lab05a;
+
 import java.io.IOException;
 
 public class AppDama {

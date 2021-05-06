@@ -1,4 +1,4 @@
-package mc322.lab05b;
+package mc322.lab05a;
 
 public class Peca {
     protected boolean viva;
