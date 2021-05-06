@@ -5,28 +5,27 @@ public class Tabuleiro {
     private int jogadaInvalida = 0;
     //cor branca é true
     //cor preta é false
-    Peca campo[][] = new Peca[8][8];
+    Peca[][] pecas = new Peca[8][8];
 
     public Tabuleiro()
     {
-        for(int i =0;i< campo.length;i++)
+        for(int i = 0; i< pecas.length; i++)
         {
-            for(int j=0; j<campo.length;j++)
+            for(int j = 0; j< pecas.length; j++)
             {
                 Peca x = new Peao();
-                campo[i][j] =x;
-                campo[i][j].setCord(i,j);
-                campo[i][j].setViva(false);
+                pecas[i][j] =x;
+                pecas[i][j].setCord(i,j);
                 if(((i<3 && i%2==0) && (j%2 != 0)) || ((i<3 && i%2!=0)&& (j%2 == 0)))
                 {
 
-                    campo[i][j].setCor(false);
-                    campo[i][j].setViva(true);
+                    pecas[i][j].setCor(false);
+                    pecas[i][j].setViva(true);
                 }
                 if(((i>4 && i%2!=0) && (j%2 == 0)) || ((i>4 && i%2==0)&& (j%2 != 0)))
                 {
-                    campo[i][j].setCor(true);
-                    campo[i][j].setViva(true);
+                    pecas[i][j].setCor(true);
+                    pecas[i][j].setViva(true);
                 }
             }
             
@@ -41,19 +40,72 @@ public class Tabuleiro {
             int i_fim = ((posicao[1].charAt(1)-48)-8)*-1;
             int j_fim = posicao[1].charAt(0) - 97;
 
-            campo[i_fim][j_fim].setCor(campo[i_inicio][j_inicio].getCor());
-            campo[i_fim][j_fim].setViva(true);
-            campo[i_inicio][j_inicio].setViva(false);
+            Peca x = new Peao();
+            pecas[i_fim][j_fim] = x;
+            pecas[i_fim][j_fim].setCord(i_fim,j_fim);
+            pecas[i_fim][j_fim].setCor(pecas[i_inicio][j_inicio].getCor());
+            pecas[i_fim][j_fim].setViva(true);
+            pecas[i_inicio][j_inicio].setViva(false);
 
-            if((i_fim==0 && campo[i_fim][j_fim].getCor()) || (i_fim==7 && !campo[i_fim][j_fim].getCor()))
-            {
+            if((i_fim==0 && pecas[i_fim][j_fim].getCor()) || (i_fim==7 && !pecas[i_fim][j_fim].getCor()) || pecas[i_inicio][j_inicio].getClass().getSimpleName().equals("Dama")) {
                 Peca nova = new Dama();
-                nova.setCor(campo[i_fim][j_fim].getCor());;
-                campo[i_fim][j_fim] = nova;
-                campo[i_fim][j_fim].setViva(true);
+                pecas[i_fim][j_fim] = nova;
+                pecas[i_fim][j_fim].setCor(pecas[i_inicio][j_inicio].getCor());
+                pecas[i_fim][j_fim].setCord(i_fim, j_fim);
+                pecas[i_fim][j_fim].setViva(true);
+            }
+
+            capturaPeca(i_inicio, i_fim, j_inicio, j_fim);
+        }
+    }
+
+    void capturaPeca(int i_inicio, int i_fim, int j_inicio, int j_fim){
+        int delta_i = i_fim-i_inicio;
+        int delta_j = j_fim-j_inicio;
+
+        if (delta_i > 0 && delta_j > 0) {   //Movimento Superior Direito
+            int j = j_inicio+1;
+            for (int i = i_inicio+1 ; i < i_fim; i++) {
+                if (pecas[i][j].viva) {
+                    pecas[i][j].viva = false; //Comer uma peca que estiver no caminho
+                    return;
+                }
+                j++;
+            }
+        }
+        else if (delta_i > 0 && delta_j < 0) { //Movimento Superior Esquerdo
+            int j = j_inicio-1;
+            for (int i = i_inicio+1 ; i < i_fim; i++) {
+                if (pecas[i][j].viva) {
+                    pecas[i][j].viva = false; //Comer uma peca que estiver no caminho
+                    return;
+                }
+                j--;
+            }
+
+        }
+        else if (delta_i < 0 && delta_j > 0) { //Movimento Inferior Direito
+            int j = j_inicio+1;
+            for (int i = i_inicio-1 ; i > i_fim; i--) {
+                if (pecas[i][j].viva) {
+                    pecas[i][j].viva = false; //Comer uma peca que estiver no caminho
+                    return;
+                }
+                j++;
+            }
+        }
+        else { //Movimento Inferior Esquerdo
+            int j = j_inicio-1;
+            for (int i = i_inicio-1 ; i > i_fim; i--) {
+                if (pecas[i][j].viva) {
+                    pecas[i][j].viva = false; //Comer uma peca que estiver no caminho
+                    return;
+                }
+                j--;
             }
         }
     }
+
     void imprimir_atual(String acao) //imprime no console o tabuleiro
     {
         if(acao == null)
@@ -66,22 +118,31 @@ public class Tabuleiro {
             System.out.println("Source: "+ movimento[0]);
             System.out.println("Target: "+ movimento[1]);
         }
-        for(int i=0;i<campo.length;i++)
+        for(int i = 0; i< pecas.length; i++)
         {
             System.out.print(-1*(i-8)+ " ");
-            for(int j=0;j<campo.length;j++)
+            for(int j = 0; j< pecas.length; j++)
             {
-                if(!campo[i][j].getViva())
+                if(!pecas[i][j].getViva())
                 {
                     System.out.print("- ");
                 }
-                else if(campo[i][j].getViva() && campo[i][j].getCor())
+                else if(pecas[i][j].getViva() && pecas[i][j].getCor())
                 {
-                    System.out.print("b ");
+                    if (pecas[i][j].getClass().getSimpleName().equals("Dama")) {
+                        System.out.print("B ");
+                    }else {
+                        System.out.print("b ");
+                    }
+
                 }
-                else if(campo[i][j].getViva() && !campo[i][j].getCor())
+                else if(pecas[i][j].getViva() && !pecas[i][j].getCor())
                 {
-                    System.out.print("p ");
+                    if (pecas[i][j].getClass().getSimpleName().equals("Dama")) {
+                        System.out.print("P ");
+                    }else {
+                        System.out.print("p ");
+                    }
                 }
             }
             System.out.println();
@@ -89,38 +150,17 @@ public class Tabuleiro {
         }
         System.out.print("  a b c d e f g h\n");
     }
-    Boolean estalivre(int i, int j) //retorna se uma posicao do tabuleiro esta livre
-    {
-        if(campo[i][j].getViva())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }   
-    }
-    Boolean difColor(int i, int j, Boolean color) //verifica se a peca tem cor diferente da cor passada
-    {
-        if( campo[i][j].getCor() == color)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+
     boolean solicitaMovimento(String posicao) // pede pra peca verificar o movimento
     {
-        String acao[] = posicao.split(":");
+        String[] acao = posicao.split(":");
         int i = ((acao[0].charAt(1)-48)-8)*-1;
         int j = acao[0].charAt(0) - 97;
         int destinoI = ((acao[1].charAt(1)-48)-8)*-1;
         int destinoJ = acao[1].charAt(0) - 97;
-        if(campo[i][j].getViva())
+        if(pecas[i][j].getViva())
         {
-            return campo[i][j].verificarValidade(destinoI, destinoJ);
+            return pecas[i][j].verificarValidade(destinoI, destinoJ);
         }
         else
         {
@@ -129,42 +169,42 @@ public class Tabuleiro {
     }
     String CriarCsv() //cria string pro .csv
     {
-        String jogo = "";
-        for(int j =0;j<campo.length;j++)
+        StringBuilder jogo = new StringBuilder();
+        for(int j = 0; j< pecas.length; j++)
         {
             String coluna = ""+ (char)(j+97);
-            for(int i=0;i<campo[0].length;i++)
+            for(int i = 0; i< pecas[0].length; i++)
             {
                 int linha =(-1*(i-8));
-                if(!campo[i][j].getViva())
+                if(!pecas[i][j].getViva())
                 {
-                    jogo += coluna+ linha+ "_\n";
+                    jogo.append(coluna).append(linha).append("_\n");
                 }
-                else if(campo[i][j].getClass().getName() == "Peao")
+                else if(pecas[i][j].getClass().getName().equals("Peao"))
                 {
-                    if(campo[i][j].getCor())
+                    if(pecas[i][j].getCor())
                     {
-                        jogo+= coluna+ linha+"b\n";
+                        jogo.append(coluna).append(linha).append("b\n");
                     }
                     else
                     {
-                        jogo+= coluna+ linha+"p\n";
+                        jogo.append(coluna).append(linha).append("p\n");
                     }
                 }
                 else
                 {
-                    if(campo[i][j].getCor())
+                    if(pecas[i][j].getCor())
                     {
-                        jogo+=coluna+ linha+"B\n";
+                        jogo.append(coluna).append(linha).append("B\n");
                     }
                     else
                     {
-                        jogo+=coluna+ linha+ "P\n";
+                        jogo.append(coluna).append(linha).append("P\n");
                     }
                 }
             }
         }
-        return jogo;
+        return jogo.toString();
     }
     void exportarArquivo(String caminho) throws IOException
     {
@@ -184,15 +224,11 @@ public class Tabuleiro {
     void imprimirTabuleiro(String[] jogadas)
     {
         imprimir_atual(null);
-        for(int i =0; i< jogadas.length;i++)
-        {
-            if(solicitaMovimento(jogadas[i]))
-            {
-                realizarJogada(jogadas[i]);
-                imprimir_atual(jogadas[i]);
-            }
-            else
-            {
+        for (String jogada : jogadas) {
+            if (solicitaMovimento(jogada)) {
+                realizarJogada(jogada);
+                imprimir_atual(jogada);
+            } else {
                 jogadaInvalida = 1;
                 System.out.println("Movimento invalido!");
             }
@@ -201,44 +237,44 @@ public class Tabuleiro {
 
     String criarString() //cria strings para o vetor
     {
-        String jogo = "";
-        for(int i =0;i<campo.length;i++)
+        StringBuilder jogo = new StringBuilder();
+        for(int i = 0; i< pecas.length; i++)
         {
-            for(int j=0;j<campo[0].length;i++)
+            for(int j = 0; j< pecas[0].length; i++)
             {
-                if(!campo[i][j].getViva())
+                if(!pecas[i][j].getViva())
                 {
-                    jogo += "-";
+                    jogo.append("-");
                 }
                 else
                 {
-                    if(campo[i][j].getClass().getName() == "Peao")
+                    if(pecas[i][j].getClass().getSimpleName().equals("Peao"))
                     {
-                        if(campo[i][j].getCor())
+                        if(pecas[i][j].getCor())
                         {
-                            jogo+= "b";
+                            jogo.append("b");
                         }
                         else
                         {
-                            jogo+= "p";
+                            jogo.append("p");
                         }
                     }
                     else
                     {
-                        if(campo[i][j].getCor())
+                        if(pecas[i][j].getCor())
                         {
-                            jogo+= "B";
+                            jogo.append("B");
                         }
                         else
                         {
-                            jogo+= "P";
+                            jogo.append("P");
                         }
                     }
                 }
             }
-            jogo +="\n";
+            jogo.append("\n");
         }
-        return jogo;
+        return jogo.toString();
     }
 
     String[] saidaVetor(String[] jogadas) //saida igual ao vetor do RestaUm

@@ -66,8 +66,7 @@ public class CSVHandling {
 		try {
 			PrintWriter fileExport = new PrintWriter(new FileWriter(dataExport, true));
 			if (state != null)
-			   for (int s = 0; s < state.length; s++)
-			      fileExport.println(state[s]);
+				for (String value : state) fileExport.println(value);
 			fileExport.close();
 		}catch(IOException erro){
 			erro.printStackTrace();

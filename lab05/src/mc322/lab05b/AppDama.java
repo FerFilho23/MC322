@@ -2,8 +2,7 @@ package mc322.lab05b;
 import java.io.IOException;
 
 public class AppDama {
-    static String[] executaJogo(String caminho) throws IOException
-    {
+    static String[] executaJogo(String caminho) {
         CSVHandling csv = new CSVHandling();
         Tabuleiro jogo = new Tabuleiro();
         Tabuleiro vetor = new Tabuleiro();
@@ -11,7 +10,6 @@ public class AppDama {
         csv.setDataSource(caminho);
         String[] jogadas = csv.requestCommands();
         jogo.imprimirTabuleiro(jogadas);
-        vetor.saidaVetor(jogadas);
         
         return vetor.saidaVetor(jogadas);
     }

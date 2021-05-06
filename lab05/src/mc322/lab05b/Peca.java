@@ -1,19 +1,19 @@
 package mc322.lab05b;
 
 public class Peca {
-    protected Boolean viva;
-    protected Boolean cor;
+    protected boolean viva;
+    protected boolean cor;
     protected int i;
     protected int j;
 
     //cor branca é true
     //cor preta é false
     
-    void setViva(Boolean estado)
+    void setViva(boolean estado)
     {
         viva = estado;
     }
-    Boolean getViva()
+    boolean getViva()
     {
         return viva;
     }
@@ -29,17 +29,30 @@ public class Peca {
         vetorCord[1] = j; 
         return vetorCord; 
     }
-    void setCor(Boolean cor)
+    void setCor(boolean cor)
     {
         this.cor = cor;
     }
-    Boolean getCor()
+    boolean getCor()
     {
         return cor;
     }
-    Boolean verificarValidade(int FimI, int FimJ)
+    boolean verificarValidade(int FimI, int FimJ)
     {
-        // somente os 3 topicos do item verificacoes do roteiro
-        return false;
+        //1 - Andar com a peça em uma posição inválida (que ultrapassa os limites do tabuleiro).
+        if ((FimI > 7 || FimI < 0) && (FimJ > 7 || FimJ < 0)) {
+            return false;
+        }
+
+        //2 - Andar em linha reta - cada componente do vetor posição r = [j, i] deve possuir o mesmo módulo
+        int[] coordenadas = this.getCord();
+        int delta_i = Math.abs(FimI - coordenadas[0]);
+        int delta_j = Math.abs(FimJ - coordenadas[1]);
+
+        if (delta_i != delta_j) {
+            return false;
+        }
+
+        return true;
     }
 }
